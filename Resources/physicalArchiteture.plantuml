@@ -1,0 +1,49 @@
+@startuml Physical Architeture
+
+package "Deployment View" {
+
+    node Smartphone {
+        artifact "App (Flutter)" as nome{
+        }
+
+        database "LocalDB (SQL)" as localDB {
+        }
+
+        nome ..> localDB
+    }
+
+    node AppServer {
+
+        top to bottom direction
+
+        artifact "Application UI (Dart)" as AppUI {
+        }
+
+        
+        artifact "Activities Management Logic (Dart)" as ACTM {
+        }
+
+        database "Database (NoSQL)" as database {
+        }
+
+        AppUI ..> ACTM
+
+        ACTM ..> database
+
+
+    }
+
+
+    node GoogleServer {
+        artifact "GPS Services (API)" as GPS {
+        }
+    }
+
+    Smartphone "*" -- "1" AppServer
+
+    ACTM  ..> GPS
+
+    AppServer "1" -- "1" GoogleServer
+}
+
+@enduml

@@ -1,0 +1,45 @@
+@startuml Logical Architeture
+
+package "App" as Apl {
+
+    top to bottom direction
+
+    package "User Interface" as IU {
+        [User Interface] as UI
+    }
+
+    package "App Management Logic" as AML{
+        [Ranking System] as Ranking
+        [Posts Management] as Posts
+        [Users Management] as Users
+        [Activities Management] as Activites
+    }
+
+    package "Database" as DatabaseI{
+
+        [Database] as DB
+    }
+
+    
+    IU ~~> AML
+    AML ~~> API
+    AML ~~> DatabaseI
+
+
+}
+
+package "External Services" as ES {
+    
+    package "External Database" as EDB{
+        [Location Services] as GPS
+    }
+    package "API" as API{
+        [Google Location API]
+    }
+
+    API ~~> EDB
+
+}
+
+
+@enduml
